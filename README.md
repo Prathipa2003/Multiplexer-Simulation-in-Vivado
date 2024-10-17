@@ -152,8 +152,7 @@ module mux4_to_1_structural (
     input wire D,
     input wire S0,
     input wire S1,
-    output wire Y
-);
+    output wire Y);
     wire mux_low, mux_high;
 
     // Instantiate two 2:1 MUXes
