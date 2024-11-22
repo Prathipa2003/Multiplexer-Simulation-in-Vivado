@@ -1,11 +1,11 @@
-SIMULATION AND IMPLEMENTATION OF LOGIC GATES
-AIM:
+#SIMULATION AND IMPLEMENTATION OF LOGIC GATES
+#AIM:
 To design and simulate a 4:1 Multiplexer (MUX) using Verilog HDL in four different modeling styles—Gate-Level, Data Flow, Behavioral, and Structural—and to verify its functionality through a testbench using the Vivado 2023.1 simulation environment. The experiment aims to understand how different abstraction levels in Verilog can be used to describe the same digital logic circuit and analyze their performance.
 
-APPARATUS REQUIRED:
+# APPARATUS REQUIRED:
 Vivado 2023.1
 
-Procedure
+# Procedure
 1. Launch Vivado
 Open Vivado 2023.1 by double-clicking the Vivado icon or searching for it in the Start menu.
 2. Create a New Project
@@ -51,19 +51,18 @@ You can include the timing diagram from the simulation window showing the correc
 10. Close the Simulation
 Once done, close the simulation by going to Simulation → "Close Simulation".
 
-Logic Diagram
+# Logic Diagram
 
-![image](https://github.com/user-attachments/assets/d4ab4bc3-12b0-44dc-8edb-9d586d8ba856)
+![image](https://github.com/user-attachments/assets/a3c940ab-2250-4dc9-ab81-41b91aa627aa)
 
 Truth Table
 
-![image](https://github.com/user-attachments/assets/c850506c-3f6e-4d6b-8574-939a914b2a5f)
+![image](https://github.com/user-attachments/assets/90a77013-291e-4503-a12a-8aa9e53b6aa1)
 
-Verilog Code
 
+# Verilog Code
 4:1 MUX Gate-Level Implementation
-
-// mux4_to_1_gate.v
+```
 module mux4_to_1_gate (
     input wire A,
     input wire B,
@@ -89,10 +88,16 @@ module mux4_to_1_gate (
     // OR gate to combine all AND gate outputs
     or (Y, A_and, B_and, C_and, D_and);
 endmodule
+```
+
+# OUTPUT 
+
+![image](https://github.com/user-attachments/assets/67339f27-9b73-4f45-8fc9-ffaf52cb62ed)
+
 
 4:1 MUX Data Flow Implementation
 
-// mux4_to_1_dataflow.v
+```
 module mux4_to_1_dataflow (
     input wire A,
     input wire B,
@@ -107,10 +112,14 @@ module mux4_to_1_dataflow (
                (S1 & ~S0 & C) |
                (S1 & S0 & D);
 endmodule
+```
+
+# OUTPUT
+
+![image](https://github.com/user-attachments/assets/58ee0910-57af-43c1-b960-3d0cbe62f4c8)
 
 4:1 MUX Behavioral Implementation
-
-// mux4_to_1_behavioral.v
+```
 module mux4_to_1_behavioral (
     input wire A,
     input wire B,
@@ -130,10 +139,14 @@ module mux4_to_1_behavioral (
         endcase
     end
 endmodule
+```
+
+# OUTPUT
+
+![image](https://github.com/user-attachments/assets/34d20ba6-0752-483c-b274-9506a76af86e)
 
 4:1 MUX Structural Implementation
-
-// mux2_to_1.v
+```
 module mux2_to_1 (
     input wire A,
     input wire B,
@@ -162,12 +175,14 @@ module mux4_to_1_structural (
     // Instantiate the final 2:1 MUX
     mux2_to_1 mux_final (.A(mux_low), .B(mux_high), .S(S1), .Y(Y));
 endmodule
+```
+
+# OUTPUT
+
+![image](https://github.com/user-attachments/assets/239840fc-3f6c-4802-85c9-a24eec9c69ce)
 
 Testbench Implementation
-
-// mux4_to_1_tb.v
-`timescale 1ns / 1ps
-
+```
 module mux4_to_1_tb;
     // Inputs
     reg A;
@@ -251,18 +266,18 @@ module mux4_to_1_tb;
                  $time, S1, S0, A, B, C, D, Y_gate, Y_dataflow, Y_behavioral, Y_structural);
     end
 endmodule
-
+```
 
 Sample Output
-
+```
 Time=0 | S1=0 S0=0 | Inputs: A=0 B=0 C=0 D=0 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
 Time=10 | S1=0 S0=0 | Inputs: A=0 B=0 C=0 D=0 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
 Time=20 | S1=0 S0=0 | Inputs: A=0 B=0 C=0 D=1 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
 Time=30 | S1=0 S0=1 | Inputs: A=0 B=0 C=0 D=1 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
 Time=40 | S1=1 S0=0 | Inputs: A=0 B=0 C=0 D=1 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
-...
+```
 
-Conclusion:
+# Conclusion:
 
 In this experiment, a 4:1 Multiplexer was successfully designed and simulated using Verilog HDL across four different modeling styles: Gate-Level, Data Flow, Behavioral, and Structural. The simulation results verified the correct functionality of the MUX, with all implementations producing identical outputs for the given input conditions.
 
